@@ -5,7 +5,7 @@ class JwtGenerator{
     jwtKey;
 
     constructor(jwtKey){
-        this.jwtKey;
+        this.jwtKey= jwtKey;
     }
 
     generateJwtUser(userId, username){

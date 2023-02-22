@@ -10,7 +10,7 @@ class UsersController{
         const usersData = req.body;
         if(usersData.email){
             
-            const users = await new  CrudOperations(Users).getDocument({"email":usersData.email});
+            const users = await new  CrudOperations(Users).getDocument({"email":usersData.email, "isDeleted":false});
             if(users){
                 return res.status(400).json({
                     "msg":"Users already exists please login"
@@ -52,20 +52,14 @@ class UsersController{
                 const isMatch = await bcrypt.compare(usersData.password, user.password);
                 if(isMatch){
                     let token
-                    const jwtGenerator = new JwtGenerator("security");
-                    if(user.role === UserRole.employee){
-                     token = jwtGenerator.generateJwtUser (user._id,user.name,user.role)
+                    const jwtGenerator = new JwtGenerator("secret");
+                    
+                     token = jwtGenerator.generateJwtUser(user._id,user.name)
                      res.status(200).json({           
-                        "msg":"employee login successful ",           
+                        "msg":"User login successful ",           
                         "token":token           
-                    })     
-                    }else{
-                            token = jwtGenerator.generateJwtUser(user._id,user.name,user.role)
-                            res.status(200).json({           
-                               "msg":"mentor login successful ",           
-                               "token":token           
-                           })     
-                         }   }        
+                })    
+                    }      
                 else{           
                     res.status(400).json({           
                         "msg":"invalid credentials"})
