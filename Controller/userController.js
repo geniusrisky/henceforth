@@ -9,7 +9,8 @@ class UsersController{
     async signUp(req,res){
         const usersData = req.body;
         if(usersData.email){
-            const users = await new  CrudOperations(Users).getDocument({"email":usersData.email,"isDeleted":false});
+            
+            const users = await new  CrudOperations(Users).getDocument({"email":usersData.email});
             if(users){
                 return res.status(400).json({
                     "msg":"Users already exists please login"

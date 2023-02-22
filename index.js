@@ -7,7 +7,7 @@ let app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 let port = 3000
-const url = "mongodb://127.0.0.1/taskDb";
+const url = "mongodb://127.0.0.1/taskData";
 
 mongoose.connect(url, {useNewUrlParser: true}).then(()=>{
     console.log('mongDb is connected');
