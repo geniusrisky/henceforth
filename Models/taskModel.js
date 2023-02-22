@@ -20,6 +20,10 @@ const TaskSchema =  new mongoose.Schema({
         type: Boolean,
         default: false,
         required: true
+    },
+    isDeleted:{
+        type:Boolean,
+        default:false
     }
 },{timestamps: true})
 
